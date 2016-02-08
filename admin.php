@@ -1,8 +1,12 @@
 <?php
+ include 'functions.php';
+
  session_start(); 
- if( !isset($_SESSION['username']) ) { //if the user is not been set redirect them to login page
+ 
+ if( !is_logged_in() ) { //if the user is not logged in
  	header("Location: login.php");
- }
+ 	die();
+ };
 
  ?>
 <!DOCTYPE html>
@@ -12,6 +16,7 @@
 	<title></title>
 </head>
 <body>
-	<h1>Hello, <?php echo $_SESSION['username'] ?></h1>
+	<h1>Hello, <strong style="color: green"><?php echo $_SESSION['username'] ?></strong></h1>
+	<a href="logout.php">Logout</a>
 </body>
 </html>

@@ -1,28 +1,24 @@
 <?php
-
+	include 'config.php'; //for the login credentials
+	include 'functions.php';
 	session_start();
 
-	define('USERNAME', 'shafaiatul');
-	define('PASSWORD', '1234');
 	
-
 	if ($_SERVER['REQUEST_METHOD'] =='POST') {
-		// get their values
+
+		//get the login credential from the 'config.php'
 		$username = $_POST['username'];
 		$password = $_POST['password'];
-
-		//validate that against the record (whether the user is already in the database or not)
-		if($username === USERNAME && $password === PASSWORD) {
-			//the credentials are correct 
-
-			//login (log the user in) + set the session and redirect the user to admin.php
+		
+		//validate user login input against the record 
+		//(whether the user is already in the database (in this case in config file))
+		if ( validate_user_credentials($username, $password) ) {
 			$_SESSION['username'] = $username;
 			header("Location: admin.php");
 		} else {
 			$status = "Incorrect login Credentials.";
 		}
 		
-
 	}
 ?>
 
